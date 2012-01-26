@@ -67,7 +67,8 @@ warn 'tork: Absorbing test execution overhead...'
             when :fail then "\e[31m%s\e[0m" # red
             end
     message = color % message if color and STDOUT.tty?
-    message = [message, File.read(test_file + '.log'), message] if event == :fail
+    log_file = File.join(File.dirname(test_file), '.' + File.basename(test_file) + '.log')
+    message = [message, File.read(log_file), message] if event == :fail
 
     puts message
   end

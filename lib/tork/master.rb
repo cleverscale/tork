@@ -24,7 +24,7 @@ module Master
     # throttle forking rate to meet the maximum concurrent workers limit
     sleep 1 until @command_by_worker_pid.size < Config.max_forked_workers
 
-    log_file = test_file + '.log'
+    log_file = File.join(File.dirname(test_file), '.' + File.basename(test_file) + '.log')
     worker_number = @worker_number_pool.shift
 
     Config.before_fork_hooks.each do |hook|
